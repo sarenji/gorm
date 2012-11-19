@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+var Future = require('fibers/future'), wait = Future.wait;
+var fs = require('fs');
+var path = require('path');
+var program = require('commander');
+var gorm = require('../lib/gorm');
+
+program
+  .option('-d, --directory [path]', 'specify the directory to run migrations on')
+  .parse(process.argv);
+
+// run all migrations inside a fiber
+Fiber(function() {
+  var migrationsPath = path.join(process.cwd(), program.directory || "migrations");
+  // TODO: Run only migrations you haven't run yet.
+  var files = fs.readdirSync(migrationsPath);
+
+  for (var i = 0; i < files.length; i++) {
+    if (endsWith(files[i], '.coffee')) {
+      require('coffee-script');
+    }
+    var migration = require(path.join(migrationsPath, files[i]));
+    gorm.connect();
+    migration.up.call(gorm.ddl, gorm.ddl);
+    gorm.end();
+  }
+}).run();
+
+function endsWith(fileName, ext) {
+  return fileName.substr(-ext.length) === ext;
+}

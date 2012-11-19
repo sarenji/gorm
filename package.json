@@ -1,0 +1,24 @@
+{
+  "name": "gorm",
+  "version": "0.0.0",
+  "description": "A good JavaScript ORM",
+  "main": "src/gorm.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "",
+  "keywords": [
+    "orm",
+    "object",
+    "relational",
+    "mapper"
+  ],
+  "author": "David Peter",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "~1.7.0"
+  },
+  "dependencies": {
+    "commander": "~1.1.0"
+  }
+}
