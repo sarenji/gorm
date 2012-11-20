@@ -4,7 +4,8 @@
   "description": "A good JavaScript ORM",
   "main": "src/gorm.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "prepublish": "coffee -c -o lib/ src/"
   },
   "repository": "",
   "keywords": [
