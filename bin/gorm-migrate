@@ -21,9 +21,9 @@ Fiber(function() {
       require('coffee-script');
     }
     var migration = require(path.join(migrationsPath, files[i]));
-    gorm.connect();
-    migration.up.call(gorm.ddl, gorm.ddl);
-    gorm.end();
+    gorm.db.connect();
+    migration.up.call(gorm.db.ddl, gorm.db.ddl);
+    gorm.db.end();
   }
 }).run();
 

@@ -106,6 +106,7 @@ class Column
   changeSQL: =>
     """ALTER TABLE #{@table.tableName} MODIFY #{@columnName} #{@dataType}"""
 
-gorm = {connect, end}
-gorm.ddl = {createTable, renameTable}
+gorm = {}
+gorm.db = {connect, end}
+gorm.db.ddl = {createTable, renameTable}
 module.exports = gorm
